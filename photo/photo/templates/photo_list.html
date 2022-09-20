@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+      .photo div:nth-child(2) img {
+        width: 300px;
+      }
+    </style>
+    <title>사진 전체 보기</title>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="row pb-3">
+        <div class="col">
+          <h1>Photo List</h1>
+        </div>
+        <div class="col text-center">
+          <a href="#" class="btn btn-success">New Photo</a>
+        </div>
+      </div>
+      {% if photos %}
+        {% for photo in photos %}
+          <div class="row photo my-3">
+            <div class="col">
+              <h2>
+                <a href="#">{{photo.title}}</a>
+              </h2>
+            </div>
+            <div class="col"><img src="{{photo.image}}" alt="{{photo.title}}"></div>
+            <div class="col">
+              <p>{{photo.author}},{{photo.price}}원</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="row">
+          <div class="col">사진이 없습니다.</div>
+        </div>
+      {% endif %}
+    </div>
+  </body>
+
+</html>
