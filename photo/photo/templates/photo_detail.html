@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}
-  사진등록
+  사진 전체 보기
 {% endblock title %}
 {% block content %}
   <div class="row">
     <div class="col">
       <a href=" {% url 'photo_list' %} " class="btn btn-info">List</a>
+      <a href=" {% url 'photo_edit' pk=photo.pk %} " class="btn btn-success">Edit</a>
+      <a href=" {% url 'photo_remove' pk=photo.pk %} " class="btn btn-danger">Delete</a>
     </div>
   </div>
   <div class="row pt-4">
-    <h2>New Photo</h2>
+    <h2>상세보기</h2>
   </div>
 
-  <!--사진 등록 폼-->
+  <!--사진 상세보기 폼-->
   <div class="row pt-4">
     <div class="col-8 mx-auto">
       <form method="post">
@@ -22,7 +24,7 @@
         <div class="form-group row">
           <label for="title" class="col-sm-2 col-form-label">Title</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" value="{{photo.title}}" readonly="readonly">
           </div>
         </div>
 
@@ -30,7 +32,7 @@
         <div class="form-group row">
           <label for="author" class="col-sm-2 col-form-label">Author</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="author" name="author">
+            <input type="text" class="form-control" id="author" name="author" value="{{photo.author}}" readonly="readonly">
           </div>
         </div>
 
@@ -38,7 +40,7 @@
         <div class="form-group row">
           <label for="image" class="col-sm-2 col-form-label">Image</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="image" name="image">
+            <input type="text" class="form-control" id="image" name="image" value="{{photo.image}}" readonly="readonly">
           </div>
         </div>
 
@@ -46,7 +48,7 @@
         <div class="form-group row">
           <label for="description" class="col-sm-2 col-form-label">Description</label>
           <div class="col-sm-10">
-            <textarea name="description" id="description" rows="10" class="form-control"></textarea>
+            <textarea name="description" id="description" rows="10" class="form-control" readonly="readonly">{{photo.description}}</textarea>
           </div>
         </div>
 
@@ -54,15 +56,9 @@
         <div class="form-group row">
           <label for="price" class="col-sm-2 col-form-label">Price</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="image" name="price">
+            <input type="number" class="form-control" id="image" name="price" value="{{photo.price}}" readonly="readonly">
           </div>
         </div>
-
-        <!--버튼-->
-        <div class="form-group row">
-          <button type="submit" class="btn btn-success">사진등록</button>
-        </div>
-
       </form>
     </div>
   </div>

@@ -18,6 +18,7 @@
       <form method="post">
         <!-- post 방식의 폼은 반드시 csrf token 값을 포함해야 함 -->
         {% csrf_token %}
+        <!-- {{form}} 화면에 input 태그 나열, {{form.as_p}}, {{form.as_ul}} -->
         <!--title-->
         <div class="form-group row">
           <label for="title" class="col-sm-2 col-form-label">Title</label>
@@ -57,7 +58,6 @@
             <input type="number" class="form-control" id="image" name="price">
           </div>
         </div>
-
         <!--버튼-->
         <div class="form-group row">
           <button type="submit" class="btn btn-success">사진등록</button>
