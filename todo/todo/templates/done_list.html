@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row mb-3">
+    <h1>완료 ToDo 목록</h1>
+  </div>
+  <div class="row my-3">
+    <div class="col-auto mr-auto"></div>
+    <div class="col-auto">
+      <a href=" {% url 'todo_list' %} " class="btn btn-primary">
+        Todo 목록
+      </a>
+    </div>
+  </div>
+  <table class="table">
+    <tbody>
+      {% for done in dones %}
+        <tr>
+          <th class="align-middle">
+            <a href=" {% url 'todo_detail' pk=done.pk %} ">
+              {{done.title}}
+            </a>
+            {% if done.important %}
+              <span class="badge badge-danger">!</span>
+            {% endif %}
+          </th>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}
