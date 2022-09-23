@@ -43,3 +43,59 @@ class Album(models.Model):
     def __str__(self) -> str:
         # return "%s %s %s" % (self.first_name,self.last_name,self.instrument)
         return self.name
+
+class Person2(models.Model):
+    SHIRT_SIZE = (
+        ("S","Small"),
+        ("M","Medium"),
+        ("L","Large"),
+    )
+    name = models.CharField(max_length=60)
+    shirt_size = models.CharField(max_length=1,choices=SHIRT_SIZE)
+
+    class Meta:
+        # 테이블 명 지정(default : 앱이름_클래스명)
+        db_table = "person2"
+    
+    def __str__(self):
+        return self.name + ". " + self.shirt_size
+
+class Runner(models.Model):
+    Medal_Type = models.TextChoices("MedalType", "GOLD SILVER BRONZE")
+    name = models.CharField(max_length=60)
+    medal = models.CharField(blank=True, choices=Medal_Type.choices,max_length=10)
+
+    def __str__(self):
+        return self.name + ". " + self.medal
+    
+class Fruit(models.Model):
+    # nmae 필드 : primary_key=True
+    # primary key : not null, unique
+    name = models.CharField(max_length=100, primary_key=True)
+
+    def __str__(self):
+        return self.name
+    
+
+class Question(models.Model):
+    # question_text : 200자 제한
+    # pub_date : 시간,날짜
+    question_text = models.CharField(max_length=200, verbose_name="질문")
+    pub_date = models.DateTimeField(verbose_name="작성날짜")
+
+    #str : question_text 리턴
+    def __str__(self):
+        return self.question_text
+    
+class Choice(models.Model):
+    #question = models.ForeignKey(Question,on_delete=models.CASCADE, verbose_name="the related Question")
+    
+    # choice_text : 200자 제한
+    # votes : 정수 값, default = 0
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0, verbose_name="투표")
+
+    #str : choice_text 리턴
+    def __str__(self):
+        return self.choice_text
+    
