@@ -30,12 +30,12 @@
               GenericView
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href=" {% url 'musician_create' %} ">Function Create</a>
-              <a class="dropdown-item" href="#">Class CreateView</a>
+              <a class="dropdown-item" href="{% url 'musician_create' %}">Function Create</a>
+              <a class="dropdown-item" href="{% url 'musician_list' %}">Function List</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'musician_create_cls' %}">Class CreateView</a>
+              <a class="dropdown-item" href="{% url 'musician_list_cls' %}">Class ListView</a>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Musician List</a>
           </li>
         </ul>
       </div>
@@ -43,6 +43,7 @@
     <div class="container mt-5">
       {% block content %}{% endblock content %}
     </div>
+    <script scr="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     {% block script %}{% endblock script %}
   </body>
 

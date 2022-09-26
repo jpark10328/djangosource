@@ -1,5 +1,12 @@
-from django.shortcuts import render, redirect
+from ast import Delete
+from typing import Optional
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .forms import NameForm, MusicianForm
+
+from .models import Musician
 
 
 # HttpResponse : 응답 객체
@@ -49,12 +56,12 @@ def django_form(request):
     return render(request, "django_form.html", {"form":form})
 
 
+#################### 함수형 뷰
+
 def musician_create(request):
     """
     musician 추가
     """
-
-
     if request.method == 'POST':
         form = MusicianForm(request.POST)
         if form.is_valid():
@@ -65,3 +72,108 @@ def musician_create(request):
     else:
         form = MusicianForm()
     return render(request, "musician_register.html", {"form":form})
+
+
+def musician_list(request):
+    """
+    musician 전체 리스트 보기- get 방식
+    """
+    musician_list = Musician.objects.all()
+
+    #musician.list.html
+    return render(request, "musician_list.html", {"musician_list":musician_list})
+
+
+def musician_detail(request,pk):
+    """
+    pk에 해당하는 musician 정보 추출 - 상세조회
+    """
+    musician = get_object_or_404(Musician, pk=pk)
+
+    # musician_detail.html
+    return render(request, "musician_detail.html", {"musician":musician})
+
+def musician_edit(request,pk):
+    """
+    pk에 해당하는 musician 정보 추출 - 수정
+    """
+    musician = get_object_or_404(Musician, pk=pk)
+
+    # get, post 따로 작성
+    if request.method == "POST":
+        form = MusicianForm(request.POST,instance=musician)
+        if form.is_valid():
+            musician = form.save()
+            return redirect("musician_detail", pk=musician.pk)
+    else:
+        form = MusicianForm(instance=musician)
+
+    # musician_edit.html
+    return render(request, "musician_edit.html", {"form":form})
+
+def musician_remove(request,pk):
+    """
+    pk에 해당하는 musician 삭제
+    """
+    musician = get_object_or_404(Musician, pk=pk)
+    musician.delete()
+
+    # 삭제 후 리스트로 이동
+    return redirect("musician_list")
+
+
+######################
+# 클래스 기반의 뷰
+# 1. 제네릭 display view(DetailView, ListView)
+#
+######################
+
+class MusicianListView(ListView):
+    """
+    함수형 뷰 - musician_list() 와 같은 역할
+    """
+    model = Musician
+    template_name = "musician_list.html" # 생략 가능(templates/exam/musician_list.html 이라면)
+
+
+class MusicianDetailView(DetailView):
+    """
+    함수형 뷰 - musician_detail() 와 같은 역할
+    """
+    model = Musician
+    template_name = "musician_detail.html" # 생략 가능(templates/exam/musician_detail.html 이라면)
+
+
+######################
+# 클래스 기반의 뷰
+# 2. 제네릭 Edit view(CreateView, UpdateView, DeleteView)
+######################
+
+class MusicianCreateView(CreateView):
+    """
+    함수형 뷰 - musician_create()와 같은 역할
+    """
+    form_class = MusicianForm
+    template_name = "musician_register.html" # 생략 가능(templates/exam/musician_register.html 이라면)
+    success_url = reverse_lazy("musician_list_cls")
+
+class MusicianUpdateView(UpdateView):
+    """
+    함수형 뷰 - musician_edit()와 같은 역할
+    """
+    model = Musician
+    fields = "__all__"
+    template_name="musician_edit.html"
+    success_url = reverse_lazy("musician_list_cls")
+
+class MusicianDeleteView(DeleteView):
+    """
+    함수형 뷰 - musician_remove()와 같은 역할
+    """
+    model = Musician
+    success_url = reverse_lazy("musician_list_cls")
+    # template_name = "musician_remove.html" exam/musician_confirm_delete.html
+
+    # post로 들어왔을 때만 삭제로 정의되어 있기 때문에 추가
+    def get(self, *args, **kwargs):
+        return self.delete(*args, **kwargs)
