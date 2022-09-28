@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% comment %} static 을 사용하려면 로드부터!! {% endcomment %}
+{% load static %}
+{% block content %}
+  <h1>App1</h1>
+  <div>
+    <img src="{% static 'img/DOG.jpg' %}" alt="">
+  </div>
+  <div>
+    <a href="{% url 'app1:detail' %}" class="btn btn-success">이동하기</a>
+  </div>
+{% endblock content %}
