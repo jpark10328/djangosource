@@ -15,5 +15,22 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
+    # 좋아요
+    likes = models.ManyToManyField(User,related_name="likes",blank=True)
+
     def __str__(self) -> str:
         return self.title
+
+class Comment(models.Model):
+    """
+    댓글-글번호(자동-pk), 내용(TextField), 작성날짜(DateTime), 수정날짜, 작성자(User), post글번호
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField(default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) -> str:
+        return "%s - %s" % (self.id, self.user)
+    

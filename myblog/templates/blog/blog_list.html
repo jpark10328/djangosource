@@ -3,14 +3,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <a href="{% url 'post_write' %}" class="btn btn-primary float-right">글쓰기</a>
+        <a href="{% url 'posts_write' %}" class="btn btn-primary float-right">글쓰기</a>
       </div>
     </div>
     <!-- 반복문 돌릴 부분 -->
     {% for post in posts %}
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          <a href="">
+          <a href="{% url 'post_detail' post.pk %}">
             <h3 class="post-title">
               {{post.title}}
             </h3>

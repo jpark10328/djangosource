@@ -142,3 +142,8 @@ LOGOUT_REDIRECT_URL = "/"
 
 # User를 장고가 제공해주는 부분을 사용하지 않기 때문에 설정 필요
 AUTH_USER_MODEL = 'user.User'
+
+
+# 첨부파일
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

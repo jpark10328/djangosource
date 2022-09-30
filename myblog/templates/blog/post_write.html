@@ -2,7 +2,8 @@
 {% block title %}글작성{% endblock title %}
 {% block content %}
   <div class="container">
-    <form action="" method="post">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
       <div class="form-group">
         <label for="title">제목</label>
         <input type="text" name="title" id="title" placeholder="제목을 입력해 주세요" class="form-control">
