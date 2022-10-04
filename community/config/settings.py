@@ -52,10 +52,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog",
-    "user",
+    "users",
+    "board",
 ]
-INSTALLED_APPS += ['django_social_share','taggit']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -142,7 +141,7 @@ LOGOUT_REDIRECT_URL = "/"
 
 
 # User를 장고가 제공해주는 부분을 사용하지 않기 때문에 설정 필요
-AUTH_USER_MODEL = 'user.User'
+# AUTH_USER_MODEL = 'user.User'
 
 
 # 첨부파일

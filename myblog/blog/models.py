@@ -2,6 +2,7 @@ from django.db import models
 from user.models import User
 from django.utils import timezone
 
+from taggit.managers import TaggableManager
 
 
 # 글번호(자동-pk), 제목(30), 내용(TextField), 작성날짜(DateTime), 수정날짜, 작성자(User),
@@ -17,6 +18,9 @@ class Post(models.Model):
 
     # 좋아요
     likes = models.ManyToManyField(User,related_name="likes",blank=True)
+
+    # tag
+    tags = TaggableManager(blank=True)
 
     def __str__(self) -> str:
         return self.title

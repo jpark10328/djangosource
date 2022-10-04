@@ -35,6 +35,9 @@ def posts_write(request):
             # user 정보 가져오기
             post.user = request.user
             post.save()
+            # 태그 저장
+            form.save_m2m()
+
             # 이동
             return redirect("posts_list")
         pass
