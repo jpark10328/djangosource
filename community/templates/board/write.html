@@ -19,6 +19,7 @@
             {% else %}
               <input type="{{field.field.widget.input_type}}" class="form-control" id="{{field.id_for_label}}" placeholder="{{field.label}}" name="{{field.name}}" value="{{field.value|default_if_none:''}}">
             {% endif %}
+
           </div>
         {% endfor %}
         <button class="btn btn-primary" type="submit">등록</button>

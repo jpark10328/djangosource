@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import redirect, render
 
 from django.views.generic.base import TemplateView
 
@@ -11,17 +11,18 @@ class HomeView(TemplateView):
 
 def register(request):
     """
-    get, post 
+    get, post
     """
     if request.method == "POST":
         # post 넘어온 데이터에 폼에 담기
         form = RegisterForm(request.POST)
         # form 검증
         if form.is_valid():
-        # save
+            # save
             form.save()
-            # login 이동
+            # home 이동
             return redirect("login")
     else:
         form = RegisterForm()
     return render(request, "users/register.html", {"form":form})
+

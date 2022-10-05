@@ -13,7 +13,7 @@ class AccountManager(BaseUserManager):
         """
         if not email:
             raise ValueError("The given email must be set")
-        email = self.normalize_email(email)
+        email = self.normalize_email(email)                       
         user = self.model(email=email, name=name, phone=phone, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -40,8 +40,8 @@ class AccountManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     # 이메일을 userid 로 사용
     email = models.EmailField(verbose_name ="이메일", unique=True)
-    name = models.CharField(verbose_name = "이름" , max_length=50)
-    phone = models.CharField(verbose_name = "핸드폰" , max_length=50)
+    name = models.CharField(verbose_name ="이름",max_length=50)
+    phone = models.CharField(verbose_name ="핸드폰",max_length=50)
 
     is_staff = models.BooleanField(default=False)
 

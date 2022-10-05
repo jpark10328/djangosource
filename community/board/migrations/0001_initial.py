@@ -12,49 +12,22 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("taggit", "0005_auto_20220424_2025"),
+        ('taggit', '0005_auto_20220424_2025'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Board",
+            name='Board',
             fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("title", models.CharField(max_length=120, verbose_name="제목")),
-                ("contents", models.TextField()),
-                (
-                    "created_at",
-                    models.DateTimeField(auto_now_add=True, verbose_name="등록날짜"),
-                ),
-                (
-                    "tags",
-                    taggit.managers.TaggableManager(
-                        blank=True,
-                        help_text="A comma-separated list of tags.",
-                        through="taggit.TaggedItem",
-                        to="taggit.Tag",
-                        verbose_name="Tags",
-                    ),
-                ),
-                (
-                    "writer",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        to=settings.AUTH_USER_MODEL,
-                        verbose_name="작성자",
-                    ),
-                ),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=128, verbose_name='제목')),
+                ('contents', models.TextField()),
+                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')),
+                ('tags', taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags')),
+                ('writer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자')),
             ],
             options={
-                "db_table": "alpaco_board",
+                'db_table': 'alpaco_board',
             },
         ),
     ]
