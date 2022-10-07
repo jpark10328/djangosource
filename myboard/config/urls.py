@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 
-from board import views
+from board.views import base_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/',include('board.urls')),
     path('users/',include('users.urls')),
-    path('', views.index),
+    path('', base_views.index),
 ]
 
 if settings.DEBUG:

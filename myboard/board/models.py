@@ -10,6 +10,8 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,verbose_name="작성날짜")
     # modified_at 칼럼 추가
     modified_at = models.DateTimeField(auto_now=True,verbose_name="수정날짜")
+    #추천
+    voter = models.ManyToManyField(User, related_name='voter_question')
    
 
     def __str__(self) -> str:
@@ -26,6 +28,8 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,verbose_name="작성날짜")
     # modified_at 칼럼 추가
     modified_at = models.DateTimeField(auto_now=True,verbose_name="수정날짜")
+    #추천
+    voter = models.ManyToManyField(User, related_name='voter_answer')
     
 
 # 댓글 - 작성자, 댓글내용, 댓글작성일시, 댓글 수정일시, 이 댓글이 달린 질문, 이 댓글이 달린 답변
