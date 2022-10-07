@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import base_views, question_views, answer_views, comment_views
+from .views import base_views, question_views, answer_views, comment_views, voter_views
 
 app_name = "board"
 
@@ -56,6 +56,7 @@ urlpatterns = [
 
     #### 추천
     # http://127.0.0.1:8000/board/vote/question/1/
+    path('vote/question/<int:question_id>/',voter_views.vote_question, name="vote_question"),
 
     # http://127.0.0.1:8000/board/vote/answer/1/
 ]
