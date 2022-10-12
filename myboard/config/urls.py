@@ -16,14 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 
 from board.views import base_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/',include('board.urls')),
     path('users/',include('users.urls')),
     path('', base_views.index),
+
+    # path("", include("django.contrib.auth.urls")),
+    
 ]
 
 if settings.DEBUG:

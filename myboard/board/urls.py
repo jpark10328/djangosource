@@ -19,44 +19,42 @@ urlpatterns = [
 
     # http://127.0.0.1:8000/board/question/modify/1/
     path('question/modify/<int:question_id>/',question_views.question_modify, name="question_modify"),
-
+    
     # http://127.0.0.1:8000/board/question/delete/1/
     path('question/delete/<int:question_id>/',question_views.question_delete, name="question_delete"),
+
 
     ###### 답변 
 
     # http://127.0.0.1:8000/board/answer/create/1/
     path('answer/create/<int:question_id>/',answer_views.answer_create, name="answer_create"),
-    
+
     # http://127.0.0.1:8000/board/answer/modify/1/
     path('answer/modify/<int:answer_id>/',answer_views.answer_modify, name="answer_modify"),
-    
+
     # http://127.0.0.1:8000/board/answer/delete/1/
     path('answer/delete/<int:answer_id>/',answer_views.answer_delete, name="answer_delete"),
 
-    ##### Comment
+
+    #### Comment
     # http://127.0.0.1:8000/board/comment/create/question/1/
     path('comment/create/question/<int:question_id>/',comment_views.comment_create_question, name="comment_create_question"),
+
 
     # http://127.0.0.1:8000/board/comment/modify/question/1/
     path('comment/modify/question/<int:comment_id>/',comment_views.comment_modify_question, name="comment_modify_question"),
 
     # http://127.0.0.1:8000/board/comment/delete/question/1/
     path('comment/delete/question/<int:comment_id>/',comment_views.comment_delete_question, name="comment_delete_question"),
-
-    # http://127.0.0.1:8000/board/comment/create/answer/1/
+   
     path('comment/create/answer/<int:answer_id>/',comment_views.comment_create_answer, name="comment_create_answer"),
-
-    # http://127.0.0.1:8000/board/comment/modify/answer/1/
     path('comment/modify/answer/<int:comment_id>/',comment_views.comment_modify_answer, name="comment_modify_answer"),
-
-    # http://127.0.0.1:8000/board/comment/delete/answer/1/
     path('comment/delete/answer/<int:comment_id>/',comment_views.comment_delete_answer, name="comment_delete_answer"),
+
 
 
     #### 추천
     # http://127.0.0.1:8000/board/vote/question/1/
     path('vote/question/<int:question_id>/',voter_views.vote_question, name="vote_question"),
-
-    # http://127.0.0.1:8000/board/vote/answer/1/
+    path('vote/answer/<int:answer_id>/',voter_views.vote_answer, name="vote_answer"),
 ]

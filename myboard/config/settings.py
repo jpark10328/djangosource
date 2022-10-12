@@ -156,3 +156,15 @@ LOGIN_REDIRECT_URL = "/"
 
 # logout 이후 가야할 곳 지정
 LOGOUT_REDIRECT_URL = "/"
+
+
+# 이메일 서버 설정
+DEFAULT_FROM_EMAIL = "본인의 네이버 이메일 주소 기입"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST = "smtp.naver.com"
+EMAIL_HOST_USER = "본인의 네이버 아이디 기입"
+EMAIL_HOST_PASSWORD = "본인의 네이버 비밀번호 기입"
+EMAIL_PORT = 465
+

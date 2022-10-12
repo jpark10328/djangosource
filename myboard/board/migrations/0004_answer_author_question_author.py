@@ -9,30 +9,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("board", "0003_remove_question_modified_at"),
+        ('board', '0003_remove_question_modified_at'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name="answer",
-            name="author",
-            field=models.ForeignKey(
-                default=1,
-                on_delete=django.db.models.deletion.CASCADE,
-                to=settings.AUTH_USER_MODEL,
-                verbose_name="작성자",
-            ),
+            model_name='answer',
+            name='author',
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자'),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name="question",
-            name="author",
-            field=models.ForeignKey(
-                default=1,
-                on_delete=django.db.models.deletion.CASCADE,
-                to=settings.AUTH_USER_MODEL,
-                verbose_name="작성자",
-            ),
+            model_name='question',
+            name='author',
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='작성자'),
             preserve_default=False,
         ),
     ]

@@ -1,10 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import redirect, render,get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 
-from ..forms import AnswerForm, QuestionForm, CommentForm
-from ..models import Question, Answer, Comment
+from ..forms import AnswerForm, CommentForm, QuestionForm
+from ..models import Answer, Question, Comment
 
 @login_required(login_url='users:login')
 def question_create(request):
@@ -39,11 +38,11 @@ def question_modify(request,question_id):
             question = form.save(commit=False)
             question.author = request.user
             question.save()
-            # 성공시 detail
-            return redirect("board:question_detail", question_id=question_id)
+            # 성공시 detail 
+            return redirect("board:question_detail",question_id=question_id)
     else:
         form = QuestionForm(instance=question)
-    
+
     return render(request, "board/question_modify.html", {"form":form})
 
 @login_required(login_url='users:login')
@@ -52,8 +51,7 @@ def question_delete(request, question_id):
     Question 삭제
     """
     question = get_object_or_404(Question, pk=question_id)
-    
-    question.delete()
 
-    # 성공시 List 보여주기
+    question.delete()
+    # 성공시 list 보여주기
     return redirect("board:index")
