@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
+{% load static %}
 {% block content %}
   <div class="container my-3">
     <div class="row">
@@ -35,5 +37,16 @@
         </div>
       </form>
     </div>
+    <hr>
+    <div class="text-muted my-3">
+      <small>구글 또는 카카오 계정으로 로그인</small>
+    </div>
+    <a href="{% provider_login_url 'google' %}">
+      <img src="{% static 'img/google.png' %}" alt="구글로그인">
+    </a>
+    <a href="{% provider_login_url 'kakao' %}">
+      <img src="{% static 'img/kakao.png' %}" alt="카카오로그인">
+    </a>
+
   </div>
 {% endblock content %}

@@ -1,0 +1,59 @@
+body {
+  padding-top: 5rem;
+}
+
+.navbar {
+  width: 70%;
+}
+
+.top-menu span {
+  line-height: 1;
+}
+
+.top-menu .dropdown button {
+  border: none;
+  background-color: #fff;
+}
+
+.top-menu .dropdown button > img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 구글 머티리얼 아이콘 크기 지정 */
+.top-menu [class~="d-print-inline"] {
+  font-size: 30px;
+}
+
+a,
+a:hover {
+  color: black;
+}
+
+/* 로그인, 회원가입 */
+.cut-line {
+  color: #848587;
+  font-size: 13px;
+}
+
+/* 회원가입 */
+.right-second {
+  display: none;
+}
+.right-second .friends-info {
+  font-size: 1.1rem;
+  font-weight: 550;
+  color: #8d8f91;
+}
+.right-second .info {
+  font-size: 12px;
+  line-height: 16px;
+  color: #848587;
+}
+.right-second input::placeholder {
+  font-size: 13px;
+}
+
+a:link {
+  text-decoration: none;
+}

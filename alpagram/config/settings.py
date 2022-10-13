@@ -37,12 +37,10 @@ def get_secret(setting, secrets=secrets):
 
 SECRET_KEY = get_secret("SECRET_KEY")
 
-######################################## secret key 설정 부분
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','alpacoweb.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,17 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'board',
+    'contents',
     'users',
     'debug_toolbar',
-
-    # allauth 앱 설정
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.kakao',
-    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -96,7 +86,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -151,13 +140,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# 프로젝트 내에서 공유할 static 폴더 경로 지정
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# User 커스텀 상태이므로 인증모델 변경
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # login 이후 가야할 곳 지정
 LOGIN_REDIRECT_URL = "/"
@@ -165,54 +159,6 @@ LOGIN_REDIRECT_URL = "/"
 # logout 이후 가야할 곳 지정
 LOGOUT_REDIRECT_URL = "/"
 
-
-# 이메일 서버 설정
-DEFAULT_FROM_EMAIL = "본인의 네이버 이메일 주소"
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST = "smtp.naver.com"
-EMAIL_HOST_USER = "본인의 네이버 아이디"
-EMAIL_HOST_PASSWORD = "본인의 네이버 비밀번호"
-EMAIL_PORT = 465
-
-
-
-
-# allauth 추가설정
-secret_file = os.path.join(BASE_DIR, 'google_secret.json')
-with open(secret_file) as f:
-    social_google = json.loads(f.read())
-
-def get_social(setting, social_google=social_google):
-    try:
-        return social_google[setting]
-    except KeyError:
-        error_msg = "set the {0} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google':{
-        'APP':{
-            'client_id':get_social("client_id"),
-            'secret':get_social("client_secret"),
-        },
-        'SCOPE':[
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS':{
-            'access_type':'offline',
-        }
-    }
-}
-
-SOCIALACCOUNT_LOGIN_ON_GET = True
-SITE_ID = 1
-
+# media 생성 : 이미지 파일 업로드
+MEDIA_ROOT = Path(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
