@@ -1,6 +1,9 @@
 from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 # 이메일, 성명, 사용자이름, 비밀번호 컬럼으로 User 생성
 
@@ -52,3 +55,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = "alpagram_user"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, verbose_name="회원")
+    image = models.ImageField(upload_to = "profile/", default="profile/default.png")
+
+    class Meta:
+        db_table = "alpagram_user_profile"
+
+@receiver(post_save, sender=CustomUser)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)

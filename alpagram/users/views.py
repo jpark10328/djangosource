@@ -2,6 +2,17 @@ from django.shortcuts import render,redirect
 
 from .forms import RegisterForm
 from django.contrib.auth import authenticate,login
+from django.views.generic.base import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+@method_decorator(login_required, name="dispatch")
+class ProfileView(TemplateView):
+    """
+    프로필 정보 보여주기 - 로그인 필요
+    """
+    template_name = "users/profile.html"
 
 
 
@@ -9,7 +20,7 @@ from django.contrib.auth import authenticate,login
 
 
 
-# 기존 방식 - 지금은 사용하지 않음
+# 기존방식 - 지금은 사용하지 않음
 def register(request):
     """
     회원가입 - post

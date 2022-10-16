@@ -36,13 +36,13 @@
       <!--로그인 이후 사용자 프로필 보이는 곳-->
       <span class="dropdown mx-2 align-top">
         <button class="dropdown-toggle px-0 py-0" data-toggle="dropdown">
-          <img src="{% static 'img/men-icon.jpg' %}" alt="" class="rounded-circle">
+          <img src="{{user.profile.image.url}}" alt="" class="rounded-circle">
         </button>
         <div class="dropdown-menu mt-2">
-          <a href="" class="dropdown-item">프로필</a>
+          <a href="{% url 'profile' %}" class="dropdown-item">프로필</a>
           <a href="" class="dropdown-item">설정</a>
           <div class="dropdown-divider"></div>
-          <a href="{% url 'logout' %}" class="dropdown-divider">로그아웃</a>
+          <a href="{% url 'logout' %}" class="dropdown-item">로그아웃</a>
         </div>
       </span>
     </div>

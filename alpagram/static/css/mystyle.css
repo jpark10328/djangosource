@@ -2,6 +2,7 @@ body {
   padding-top: 5rem;
 }
 
+/* navbar */
 .navbar {
   width: 70%;
 }
@@ -20,7 +21,7 @@ body {
   height: 30px;
 }
 
-/* 구글 머티리얼 아이콘 크기 지정 */
+/* 구글 머터리얼 아이콘 크기 지정 */
 .top-menu [class~="d-print-inline"] {
   font-size: 30px;
 }
@@ -56,4 +57,51 @@ a:hover {
 
 a:link {
   text-decoration: none;
+}
+
+/* profile */
+.profile-image {
+  width: 50px;
+  width: 50px;
+}
+
+.profile-change {
+  width: 150px;
+  width: 150px;
+}
+
+/* profile modal */
+.btn-upload {
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#file {
+  display: none;
+}
+
+/* feed 디자인 */
+.card,
+.follow-list {
+  width: 30rem;
+}
+
+textarea.control {
+  display: block;
+  width: 21rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border: #fff;
+  outline-color: #fff;
+}
+textarea::placeholder {
+  vertical-align: middle;
+}
+.button {
+  border: none;
+  background-color: white;
+  color: #0096f6;
+  opacity: 0.4;
 }

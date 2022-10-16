@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'contents',
     'users',
     'debug_toolbar',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -153,12 +154,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User 커스텀 상태이므로 인증모델 변경
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# login 이후 가야할 곳 지정
+# 로그인 성공 이후에 가야할 곳
 LOGIN_REDIRECT_URL = "/"
-
-# logout 이후 가야할 곳 지정
+# 로그아웃 이후에 가야할 곳
 LOGOUT_REDIRECT_URL = "/"
 
-# media 생성 : 이미지 파일 업로드
+
+# media 설정 : 이미지 파일 업로드
 MEDIA_ROOT = Path(BASE_DIR, 'media')
 MEDIA_URL = "/media/"
