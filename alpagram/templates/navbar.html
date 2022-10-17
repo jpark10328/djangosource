@@ -14,6 +14,8 @@
         <input type="text" class="form-control mx-sm-4" placeholder="검색" id="search" aria-label="Search">
       </form>
     </div>
+    <!-- 검색 결과 보여줄 곳 -->
+    <div class="search-list" style="display:none"></div>
     <!--google 아이콘-->
     <div class="top-menu">
       <span class="material-icons d-print-inline mx-2 my-0">
@@ -22,7 +24,7 @@
       <span class="material-icons-outlined d-print-inline mx-2">
         send
       </span>
-      <a href="">
+      <a href="" id="add_box" data-toggle="modal" data-target="#exampleModalCenter">
         <span class="material-icons-outlined d-print-inline mx-2">
           add_box
         </span>

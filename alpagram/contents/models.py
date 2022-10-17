@@ -39,5 +39,12 @@ class Image(BaseModel):
     order = models.SmallIntegerField()
 
     class Meta:
-        constraints = [UniqueConstraint(name='unique_together' ,fields=['content','order'])]
+        constraints = [UniqueConstraint(name='unique_together', fields=['content','order'])]
         ordering = ['order']
+
+class FollowRelation(BaseModel):
+    follower = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="follower")
+    followee = models.ManyToManyField(CustomUser, related_name="followee")
+
+    def __str__(self) -> str:
+        return str(self.follower.id)+", "+self.follower.name

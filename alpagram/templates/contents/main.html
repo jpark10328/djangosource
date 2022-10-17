@@ -2,6 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block style %}
+  <link rel="stylesheet" href="{% static 'css/modalstyle.css' %}">
   <link rel="stylesheet" href="{% static 'css/dropzone.min.css' %}">
 {% endblock style %}
 {% block content %}
@@ -10,13 +11,18 @@
 
       <div class="col-sm-5">
         <div class="row border rounded mb-3">
-          <div class="col-3 my-2 text-center">
-            <!--팔로우 목록 보여주기-->
-            <img src="" alt="" class="rounded-circle profile-image">
-            <span class="d-block small">
-              <!--팔로우 nickname-->
-            </span>
-          </div>
+          {% if followees %}
+            {% for followee in followees %}
+              <div class="col-3 my-2 text-center">
+                <!--팔로우 목록 보여주기-->
+                <img src="{{followee.profile.image.url}}" alt="" class="rounded-circle profile-image">
+                <span class="d-block small">
+                  <!--팔로우 nickname-->
+                  {{followee.nickname}}
+                </span>
+              </div>
+            {% endfor %}
+          {% endif %}
         </div>
 
         <!--왼쪽 피드 반복되는 부분-->
@@ -32,7 +38,7 @@
 
               <!--팔로우 취소 버튼 : 본인 계정은 팔로 취소 버튼 보이지 않기-->
               {% if request.user != content.user %}
-                <a href="" class="unfollow">
+                <a href="{{content.user.id}}" class="unfollow">
                   <span class="badge badge-pill badge-danger">팔로우 취소</span>
                 </a>
               {% endif %}
@@ -177,4 +183,34 @@
 
     </div>
   </div>
+  {% include 'contents/contents_modal.html' %}
 {% endblock content %}
+{% block script %}
+  <script>
+    $(function () {
+
+      $(".unfollow").click(function (e) {
+        //이벤트 막기
+
+        //href 값 가져오기
+        let userid = $(this).attr("href");
+
+        $.ajax({
+          type: 'post',
+          url: '/apis/v1/relation/delete/',
+          data: {
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            id: userid
+          },
+          success: function (response) {
+            location.reload();
+          },
+          error: function (req, status, err) {
+            console.log(req.responseJSON.message);
+          }
+        })
+      })
+
+    })
+  </script>
+{% endblock script %}

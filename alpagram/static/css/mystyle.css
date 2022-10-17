@@ -105,3 +105,25 @@ textarea::placeholder {
   color: #0096f6;
   opacity: 0.4;
 }
+
+/* 검색결과 */
+.search-list > div {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  top: 59px;
+  left: 25%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.search-list div img {
+  width: 40px;
+  height: 40px;
+}
+.search-list .col {
+  padding-left: 0;
+}

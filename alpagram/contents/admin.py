@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Content, Image
+from .models import Content, FollowRelation, Image
 
 class ImageInline(admin.TabularInline):
     model = Image
@@ -9,3 +9,5 @@ class ContentAdmin(admin.ModelAdmin):
     inlines=[ImageInline]
 
 admin.site.register(Content, ContentAdmin)
+
+admin.site.register(FollowRelation)

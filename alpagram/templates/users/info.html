@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container my-3">
+    <div class="row justify-content-md-center border-bottom pb-4">
+      <div class="col-2">
+        <a href="#imageModal" data-toggle="modal" data-target="#imageModal">
+          <img src="{{suser.profile.image.url}}" alt="" class="rounded-circle profile-change">
+        </a>
+      </div>
+      <div class="col-6">
+        <h4>
+          <!--로그인 사용자 name-->
+          {{suser.name}}
+        </h4>
+        {% if followees_ids == 0 or suser.id not in followees_ids %}
+          <a href="{{suser.id}}" class="btn btn-primary follow">팔로우</a>
+        {% endif %}
+        <div class="row my-3">
+          <div class="col-3">
+            <span>게시물</span>
+            <span>
+              <!--사용자가 작성한 게시물 숫자 -->
+              {{contents.count}}
+            </span>
+          </div>
+          <div class="col-3">
+            <span>팔로워</span>
+            <span>
+              <!--검색결과 사용자 팔로워 수-->
+            </span>
+          </div>
+          <div class="col-3">
+            <span>팔로우</span>
+            <span>
+              <!--검색결과 사용자 팔로우 수-->
+            </span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <!--검색결과 사용자 nickname-->
+            {{suser.nickname}}
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <!--검색결과 사용자 email-->
+            {{suser.email}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--검색결과 사용자가 작성한 이미지 보여주기-->
+    <div class="row mt-3">
+      {% if contents %}
+        {% for content in contents %}
+          {% for img in content.image_set.all %}
+            <div class="col-3">
+              <img src="{{img.image.url}}" alt="" class="d-block w-100">
+            </div>
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+{% endblock content %}
+{% block script %}
+  <script>
+    $(function () {
+
+      $(".follow").click(function (e) {
+        //이벤트 막기
+
+        //href 값 가져오기
+        let userid = $(this).attr("href");
+
+        $.ajax({
+          type: 'post',
+          url: '/apis/v1/relation/create/',
+          data: {
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            id: userid
+          },
+          success: function (response) {
+            location.reload();
+          },
+          error: function (req, status, err) {
+            console.log(req.responseJSON.message);
+          }
+        })
+      })
+
+    })
+  </script>
+{% endblock script %}
